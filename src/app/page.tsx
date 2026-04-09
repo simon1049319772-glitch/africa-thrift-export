@@ -7,30 +7,11 @@ import {
   DollarSign,
   ArrowRight,
   Star,
-  Package,
-  Users,
-  Globe,
 } from "lucide-react";
-import { prisma } from "@/lib/prisma";
-import { formatPrice } from "@/lib/utils";
-
-async function getFeaturedProducts() {
-  return await prisma.product.findMany({
-    where: { featured: true },
-    include: { category: true },
-    take: 8,
-  });
-}
-
-async function getCategories() {
-  return await prisma.category.findMany({
-    include: { _count: { select: { products: true } } },
-  });
-}
+import { categories, getFeaturedProducts, formatPrice } from "@/lib/data";
 
 export default async function HomePage() {
-  const products = await getFeaturedProducts();
-  const categories = await getCategories();
+  const products = getFeaturedProducts();
 
   return (
     <>
@@ -86,7 +67,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               {
-                icon: Package,
+                icon: DollarSign,
                 title: "Direct Sourcing",
                 desc: "USA & Europe brands",
               },
@@ -101,7 +82,7 @@ export default async function HomePage() {
                 desc: "30-45 days delivery",
               },
               {
-                icon: DollarSign,
+                icon: CheckCircle,
                 title: "Best Prices",
                 desc: "Factory direct",
               },
@@ -139,7 +120,7 @@ export default async function HomePage() {
               >
                 <div className="aspect-square relative">
                   <Image
-                    src={category.image || "/placeholder.jpg"}
+                    src={category.image}
                     alt={category.name}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -148,7 +129,7 @@ export default async function HomePage() {
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <h3 className="text-white font-semibold">{category.name}</h3>
                     <p className="text-gray-300 text-sm">
-                      {category._count.products} items
+                      {category.productCount} items
                     </p>
                   </div>
                 </div>
@@ -177,47 +158,44 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {products.map((product) => {
-              const images = JSON.parse(product.images);
-              return (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.slug}`}
-                  className="card group"
-                >
-                  <div className="relative aspect-square overflow-hidden">
-                    <Image
-                      src={images[0]}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <span className="absolute top-3 left-3 px-2 py-1 bg-primary-rust text-white text-xs font-medium rounded">
-                      Grade {product.grade}
+            {products.map((product) => (
+              <Link
+                key={product.id}
+                href={`/products/${product.slug}`}
+                className="card group"
+              >
+                <div className="relative aspect-square overflow-hidden">
+                  <Image
+                    src={product.images[0]}
+                    alt={product.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <span className="absolute top-3 left-3 px-2 py-1 bg-primary-rust text-white text-xs font-medium rounded">
+                    Grade {product.grade}
+                  </span>
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-neutral-gray mb-1">
+                    {product.origin} Origin
+                  </p>
+                  <h3 className="font-medium text-neutral-dark mb-2 line-clamp-2">
+                    {product.name}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-lg font-bold text-primary-green">
+                        {formatPrice(product.price)}
+                      </span>
+                      <span className="text-xs text-neutral-gray">/pc</span>
+                    </div>
+                    <span className="text-xs text-neutral-gray">
+                      MOQ: {product.moq}
                     </span>
                   </div>
-                  <div className="p-4">
-                    <p className="text-xs text-neutral-gray mb-1">
-                      {product.origin} Origin
-                    </p>
-                    <h3 className="font-medium text-neutral-dark mb-2 line-clamp-2">
-                      {product.name}
-                    </h3>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <span className="text-lg font-bold text-primary-green">
-                          {formatPrice(product.price)}
-                        </span>
-                        <span className="text-xs text-neutral-gray">/pc</span>
-                      </div>
-                      <span className="text-xs text-neutral-gray">
-                        MOQ: {product.moq}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -285,12 +263,12 @@ export default async function HomePage() {
                 desc: "Every item passes our 3-level inspection process before shipping. Grade A/B/C clearly labeled.",
               },
               {
-                icon: Globe,
+                icon: DollarSign,
                 title: "Direct Sourcing",
                 desc: "We source directly from USA and Europe, cutting out middlemen for better prices.",
               },
               {
-                icon: Users,
+                icon: Shield,
                 title: "Expert Support",
                 desc: "Our team speaks English, French, and local African languages. WhatsApp support available.",
               },

@@ -5,24 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Minus, Plus, Heart, Share2, Truck, Shield, CheckCircle, Phone } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
-
-interface Product {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  price: number;
-  moq: number;
-  weight: number | null;
-  images: string;
-  grade: string;
-  origin: string;
-  stock: number;
-  category: {
-    name: string;
-    slug: string;
-  };
-}
+import type { Product } from "@/lib/data";
 
 interface ProductDetailProps {
   product: Product;
@@ -33,8 +16,6 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(product.moq);
   const [activeTab, setActiveTab] = useState("details");
-
-  const images = JSON.parse(product.images);
 
   const increaseQty = () => setQuantity(q => q + 1);
   const decreaseQty = () => setQuantity(q => Math.max(product.moq, q - 1));
@@ -47,8 +28,8 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
           <ChevronRight className="w-4 h-4" />
           <Link href="/products" className="hover:text-primary-green">Products</Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href={`/products?category=${product.category.slug}`} className="hover:text-primary-green">
-            {product.category.name}
+          <Link href={`/products?category=${product.categorySlug}`} className="hover:text-primary-green">
+            {product.categoryName}
           </Link>
           <ChevronRight className="w-4 h-4" />
           <span className="text-neutral-dark">{product.name}</span>
@@ -59,7 +40,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
             <div>
               <div className="relative aspect-square rounded-xl overflow-hidden mb-4">
                 <Image
-                  src={images[selectedImage]}
+                  src={product.images[selectedImage]}
                   alt={product.name}
                   fill
                   className="object-cover"
@@ -67,7 +48,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                 />
               </div>
               <div className="grid grid-cols-5 gap-2">
-                {images.map((img: string, idx: number) => (
+                {product.images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setSelectedImage(idx)}
@@ -89,7 +70,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
             <div>
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <p className="text-sm text-neutral-gray mb-1">{product.category.name}</p>
+                  <p className="text-sm text-neutral-gray mb-1">{product.categoryName}</p>
                   <h1 className="text-2xl md:text-3xl font-display font-bold text-neutral-dark mb-2">
                     {product.name}
                   </h1>
@@ -283,36 +264,33 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
               Related Products
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {relatedProducts.slice(0, 4).map((item) => {
-                const itemImages = JSON.parse(item.images);
-                return (
-                  <Link
-                    key={item.id}
-                    href={`/products/${item.slug}`}
-                    className="card group"
-                  >
-                    <div className="relative aspect-square overflow-hidden">
-                      <Image
-                        src={itemImages[0]}
-                        alt={item.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <span className="absolute top-3 left-3 px-2 py-1 bg-primary-rust text-white text-xs rounded">
-                        Grade {item.grade}
-                      </span>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-medium text-neutral-dark mb-2 line-clamp-2">
-                        {item.name}
-                      </h3>
-                      <span className="text-lg font-bold text-primary-green">
-                        {formatPrice(item.price)}
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
+              {relatedProducts.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/products/${item.slug}`}
+                  className="card group"
+                >
+                  <div className="relative aspect-square overflow-hidden">
+                    <Image
+                      src={item.images[0]}
+                      alt={item.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <span className="absolute top-3 left-3 px-2 py-1 bg-primary-rust text-white text-xs rounded">
+                      Grade {item.grade}
+                    </span>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-medium text-neutral-dark mb-2 line-clamp-2">
+                      {item.name}
+                    </h3>
+                    <span className="text-lg font-bold text-primary-green">
+                      {formatPrice(item.price)}
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </div>
           </section>
         )}
