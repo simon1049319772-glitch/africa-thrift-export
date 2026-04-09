@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  company   String?
+  phone     String?
+  whatsapp  String?
+  role      String   @default("customer")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  inquiries Inquiry[]
+  orders    Order[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  slug     String    @unique
+  image    String?
+  products Product[]
+}
+
+model Product {
+  id           Int        @id @default(autoincrement())
+  name         String
+  slug         String     @unique
+  description  String
+  price        Float
+  moq          Int        @default(1)
+  weight       Float?
+  images       String
+  categoryId   Int
+  category     Category   @relation(fields: [categoryId], references: [id])
+  grade        String     @default("A")
+  origin       String     @default("USA")
+  stock        Int        @default(100)
+  featured     Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  inquiryItems InquiryItem[]
+  orderItems   OrderItem[]
+}
+
+model Inquiry {
+  id          Int           @id @default(autoincrement())
+  userId      Int?
+  user        User?         @relation(fields: [userId], references: [id])
+  name        String
+  email       String
+  company     String?
+  phone       String
+  country     String
+  message     String?
+  status      String        @default("pending")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  items       InquiryItem[]
+}
+
+model InquiryItem {
+  id         Int     @id @default(autoincrement())
+  inquiryId  Int
+  inquiry    Inquiry @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+  productId  Int
+  product    Product @relation(fields: [productId], references: [id])
+  quantity   Int
+  notes      String?
+}
+
+model Order {
+  id          Int        @id @default(autoincrement())
+  userId      Int?
+  user        User?      @relation(fields: [userId], references: [id])
+  orderNumber String     @unique
+  totalAmount Float
+  status      String     @default("pending")
+  shippingAddress String?
+  notes       String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  items       OrderItem[]
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+}
+
+model Setting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}
