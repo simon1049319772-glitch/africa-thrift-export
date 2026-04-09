@@ -8,7 +8,8 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
-import { categories, getFeaturedProducts, formatPrice } from "@/lib/data";
+import { categories, getFeaturedProducts } from "@/lib/data";
+import { formatPrice } from "@/lib/utils";
 
 export default async function HomePage() {
   const products = getFeaturedProducts();
