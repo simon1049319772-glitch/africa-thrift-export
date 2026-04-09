@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Filter, Grid, List } from "lucide-react";
-import { categories, products, formatPrice } from "@/lib/data";
-
+import { categories, products } from "@/lib/data";
+import { formatPrice } from "@/lib/utils";
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
