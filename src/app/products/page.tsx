@@ -3,6 +3,12 @@ import Image from "next/image";
 import { Filter, Grid, List } from "lucide-react";
 import { categories, products } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Products",
+  description: "Browse our wide range of quality used clothing. T-Shirts, pants, jackets, shoes, dresses, and wholesale bales for African retailers.",
+};
 
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

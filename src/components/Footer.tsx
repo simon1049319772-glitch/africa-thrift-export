@@ -3,11 +3,11 @@ import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle } from "lucide-
 
 const footerLinks = {
   products: [
-    { name: "T-Shirts", href: "/products/t-shirts" },
-    { name: "Pants & Jeans", href: "/products/pants" },
-    { name: "Jackets", href: "/products/jackets" },
-    { name: "Shoes", href: "/products/shoes" },
-    { name: "Bales", href: "/products/bales" },
+    { name: "T-Shirts", href: "/products?category=t-shirts" },
+    { name: "Pants & Jeans", href: "/products?category=pants" },
+    { name: "Jackets", href: "/products?category=jackets" },
+    { name: "Shoes", href: "/products?category=shoes" },
+    { name: "Bales", href: "/products?category=bales" },
   ],
   company: [
     { name: "About Us", href: "/about" },
@@ -163,7 +163,7 @@ export function Footer() {
         <div className="border-t border-white/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              © 2024 AfriThrift. All rights reserved.
+              © 2024-{new Date().getFullYear()} AfriThrift. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm text-gray-400">
               <Link href="/privacy" className="hover:text-white transition-colors">

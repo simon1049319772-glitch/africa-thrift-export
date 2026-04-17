@@ -1,6 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Package, Truck, Shield, DollarSign, CheckCircle, ArrowRight, Calculator } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Wholesale",
+  description: "Get the best deals with our wholesale bale packages. Premium used clothing bales at factory-direct prices with quality guaranteed.",
+};
 
 export default function WholesalePage() {
   return (

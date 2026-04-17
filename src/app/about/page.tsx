@@ -1,6 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle, Users, Award, Truck, ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about AfriThrift - your trusted partner for premium used clothing export to Africa with 10+ years of experience.",
+};
 
 export default function AboutPage() {
   return (
