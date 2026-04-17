@@ -4,11 +4,6 @@ import { useState } from "react";
 import { HelpCircle, ChevronDown, MessageCircle, Plus, Minus } from "lucide-react";
 import { AnimationWrapper, StaggerContainer } from "@/components/AnimationWrapper";
 
-export const metadata = {
-  title: "FAQ - AfriThrift",
-  description: "Frequently asked questions about our used clothing wholesale services.",
-};
-
 const faqs = [
   {
     q: "What is the minimum order quantity?",

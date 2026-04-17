@@ -7,7 +7,7 @@ interface AnimationWrapperProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  animation?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale" | "zoom" | "fade";
+  animation?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale" | "zoom" | "fade" | "fade-in";
   once?: boolean;
 }
 
