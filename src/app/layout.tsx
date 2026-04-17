@@ -9,14 +9,15 @@ export const metadata: Metadata = {
     template: "%s | AfriThrift",
   },
   description:
-    "Your trusted partner for high-quality used clothing export to Africa. Direct sourcing, quality inspection, and reliable logistics.",
+    "Your trusted partner for high-quality used clothing export to Africa. Direct sourcing from USA & Europe, quality inspection, and reliable logistics to Nigeria, Ghana, Kenya and 50+ countries.",
   keywords: [
     "used clothing Africa",
     "wholesale used clothes",
-    "balanga for sale",
+    "bales for sale",
     "second hand clothes Nigeria",
     "Ghana wholesale clothing",
     "Kenya used clothes",
+    "Africa clothing export",
   ],
   authors: [{ name: "AfriThrift" }],
   creator: "AfriThrift",
@@ -24,9 +25,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "AfriThrift",
+    title: "AfriThrift - Premium Used Clothing for Africa",
+    description: "Your trusted partner for high-quality used clothing export to Africa.",
   },
   twitter: {
     card: "summary_large_image",
+    title: "AfriThrift - Premium Used Clothing for Africa",
+    description: "Your trusted partner for high-quality used clothing export to Africa.",
   },
   icons: {
     icon: "/favicon.svg",
@@ -40,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col">
+    <html lang="en" className="scroll-smooth">
+      <body className="min-h-screen flex flex-col antialiased">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, Globe, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Globe, ChevronDown, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -14,11 +14,12 @@ const navigation = [
 ];
 
 const productCategories = [
-  { name: "T-Shirts", href: "/products?category=t-shirts" },
-  { name: "Pants & Jeans", href: "/products?category=pants" },
-  { name: "Jackets", href: "/products?category=jackets" },
-  { name: "Shoes", href: "/products?category=shoes" },
-  { name: "Bales", href: "/products?category=bales" },
+  { name: "T-Shirts", href: "/products?category=t-shirts", count: 120 },
+  { name: "Pants & Jeans", href: "/products?category=pants", count: 85 },
+  { name: "Jackets", href: "/products?category=jackets", count: 45 },
+  { name: "Shoes", href: "/products?category=shoes", count: 60 },
+  { name: "Dresses", href: "/products?category=dresses", count: 55 },
+  { name: "Bales", href: "/products?category=bales", count: 25 },
 ];
 
 export function Header() {
@@ -28,7 +29,7 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -49,33 +50,43 @@ export function Header() {
   return (
     <header
       className={cn(
-        "bg-white sticky top-0 z-50 transition-all duration-500 ease-smooth",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
         isScrolled
-          ? "shadow-lg shadow-black/5 backdrop-blur-lg bg-white/95"
-          : "shadow-sm"
+          ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5 py-2"
+          : "bg-white/80 backdrop-blur-md py-4"
       )}
     >
       <nav className="container-custom">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 bg-primary-green rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-lg shadow-primary-green/30">
-                <span className="text-white font-bold text-xl">A</span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-10">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className={cn(
+                "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300",
+                "bg-gradient-to-br from-primary-green to-primary-green/90",
+                "shadow-lg shadow-primary-green/30",
+                "group-hover:scale-105 group-hover:rotate-3",
+                "group-hover:shadow-xl group-hover:shadow-primary-green/40"
+              )}>
+                <span className="text-white font-bold text-xl font-display">A</span>
               </div>
-              <span className="font-display font-bold text-xl text-primary-green transition-colors duration-300 group-hover:text-secondary-blue">
-                AfriThrift
-              </span>
+              <div className="hidden sm:block">
+                <span className="font-display font-bold text-xl text-neutral-dark tracking-tight transition-colors group-hover:text-primary-green">
+                  AfriThrift
+                </span>
+                <span className="block text-xs text-neutral-gray -mt-1">Premium Quality</span>
+              </div>
             </Link>
 
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-1">
               {navigation.map((item) => (
-                <div key={item.name} className="relative">
+                <div 
+                  key={item.name} 
+                  className="relative"
+                  onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
                   {item.hasDropdown ? (
-                    <button
-                      className="nav-link flex items-center gap-1 text-neutral-dark hover:text-primary-green font-medium transition-colors duration-300"
-                      onMouseEnter={() => setActiveDropdown(item.name)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
+                    <button className="nav-link flex items-center gap-1 text-neutral-dark hover:text-primary-green transition-colors">
                       {item.name}
                       <ChevronDown className={cn(
                         "w-4 h-4 transition-transform duration-300",
@@ -85,29 +96,36 @@ export function Header() {
                   ) : (
                     <Link
                       href={item.href}
-                      className="nav-link text-neutral-dark hover:text-primary-green font-medium transition-colors duration-300"
+                      className="nav-link text-neutral-dark hover:text-primary-green transition-colors"
                     >
                       {item.name}
                     </Link>
                   )}
 
                   {item.hasDropdown && activeDropdown === item.name && (
-                    <div 
-                      className="absolute top-full left-0 pt-2 animate-fade-in-down"
-                      onMouseEnter={() => setActiveDropdown(item.name)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      <div className="bg-white rounded-xl shadow-xl shadow-black/10 border border-neutral-light/50 p-4 min-w-[200px] animate-scale-in">
-                        <div className="space-y-1">
-                          {productCategories.map((category) => (
-                            <Link
-                              key={category.name}
-                              href={category.href}
-                              className="block px-4 py-2 text-neutral-dark hover:text-primary-green hover:bg-primary-green/5 rounded-lg transition-all duration-200"
-                            >
-                              {category.name}
-                            </Link>
-                          ))}
+                    <div className="absolute top-full left-0 pt-3 animate-fade-in-down">
+                      <div className="bg-white rounded-2xl shadow-2xl shadow-black/10 border border-neutral-light/50 p-2 min-w-[240px]">
+                        <div className="p-2 mb-2 border-b border-neutral-light/50">
+                          <p className="text-xs font-semibold text-neutral-gray uppercase tracking-wider">Categories</p>
+                        </div>
+                        {productCategories.map((category) => (
+                          <Link
+                            key={category.name}
+                            href={category.href}
+                            className="flex items-center justify-between px-4 py-3 text-neutral-dark hover:text-primary-green hover:bg-primary-green/5 rounded-xl transition-all duration-200 group"
+                          >
+                            <span className="font-medium">{category.name}</span>
+                            <span className="text-xs text-neutral-gray group-hover:text-primary-green">{category.count} items</span>
+                          </Link>
+                        ))}
+                        <div className="mt-2 pt-2 border-t border-neutral-light/50">
+                          <Link
+                            href="/products"
+                            className="flex items-center justify-center gap-2 px-4 py-3 text-primary-green font-semibold hover:bg-primary-green/5 rounded-xl transition-all duration-200"
+                          >
+                            <ShoppingBag className="w-4 h-4" />
+                            View All Products
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -117,38 +135,40 @@ export function Header() {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
-            <button className="flex items-center gap-2 text-sm text-neutral-gray hover:text-primary-green transition-colors duration-300 group">
-              <Globe className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
-              <span>EN</span>
+          <div className="hidden lg:flex items-center gap-5">
+            <button className="flex items-center gap-2 text-sm text-neutral-gray hover:text-primary-green transition-colors group">
+              <div className="w-8 h-8 rounded-lg bg-neutral-light/50 flex items-center justify-center group-hover:bg-primary-green/10 transition-colors">
+                <Globe className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+              </div>
+              <span className="font-medium">EN</span>
             </button>
 
             <a
               href="https://wa.me/8613888888888"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary flex items-center gap-2 group"
+              className="btn-primary flex items-center gap-2"
             >
-              <Phone className="w-4 h-4 group-hover:animate-bounce transition-transform" />
+              <Phone className="w-4 h-4" />
               Get Quote
             </a>
           </div>
 
           <button
-            className="md:hidden p-2 text-neutral-dark hover:text-primary-green transition-colors duration-300"
+            className="lg:hidden p-2 text-neutral-dark hover:text-primary-green transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <div className="relative w-6 h-6">
+            <div className="relative w-7 h-7">
               <Menu 
                 className={cn(
-                  "absolute inset-0 w-6 h-6 transition-all duration-300",
+                  "absolute inset-0 w-7 h-7 transition-all duration-300",
                   mobileMenuOpen ? "opacity-0 rotate-90" : "opacity-100 rotate-0"
                 )} 
               />
               <X 
                 className={cn(
-                  "absolute inset-0 w-6 h-6 transition-all duration-300",
+                  "absolute inset-0 w-7 h-7 transition-all duration-300",
                   mobileMenuOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-90"
                 )} 
               />
@@ -158,23 +178,42 @@ export function Header() {
 
         <div
           className={cn(
-            "md:hidden overflow-hidden transition-all duration-500 ease-smooth",
-            mobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+            "lg:hidden overflow-hidden transition-all duration-500 ease-out",
+            mobileMenuOpen ? "max-h-[600px] opacity-100 mt-4" : "max-h-0 opacity-0"
           )}
         >
-          <div className="py-4 border-t space-y-2">
+          <div className="bg-neutral-bg rounded-2xl p-4 space-y-2">
             {navigation.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="mobile-menu-item"
-                style={{ transitionDelay: `${index * 50}ms` }}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
+              <div key={item.name}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "block px-4 py-3 text-neutral-dark hover:text-primary-green",
+                    "hover:bg-white rounded-xl transition-all duration-200",
+                    "font-medium"
+                  )}
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+                {item.hasDropdown && (
+                  <div className="ml-4 space-y-1 mt-1">
+                    {productCategories.slice(0, 4).map((cat) => (
+                      <Link
+                        key={cat.name}
+                        href={cat.href}
+                        className="block px-4 py-2 text-sm text-neutral-gray hover:text-primary-green hover:bg-white rounded-lg transition-all duration-200"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {cat.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
-            <div className="pt-4 border-t mt-4">
+            <div className="pt-4 border-t border-neutral-light mt-4">
               <a
                 href="https://wa.me/8613888888888"
                 target="_blank"

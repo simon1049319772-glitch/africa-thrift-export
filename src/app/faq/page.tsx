@@ -1,4 +1,8 @@
-import { HelpCircle, ChevronDown } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { HelpCircle, ChevronDown, MessageCircle, Plus, Minus } from "lucide-react";
+import { AnimationWrapper, StaggerContainer } from "@/components/AnimationWrapper";
 
 export const metadata = {
   title: "FAQ - AfriThrift",
@@ -40,53 +44,79 @@ const faqs = [
   },
 ];
 
+function FAQItem({ faq }: { faq: typeof faqs[0] }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+      <button
+        className="w-full flex items-center justify-between p-6 text-left"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <h2 className="text-lg font-semibold text-neutral-dark pr-6">{faq.q}</h2>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen ? 'bg-primary-green text-white' : 'bg-neutral-light text-neutral-gray'}`}>
+          {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+        </div>
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
+        <div className="px-6 pb-6 pt-0 text-neutral-gray leading-relaxed">
+          {faq.a}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function FAQPage() {
   return (
     <div className="bg-neutral-bg min-h-screen">
-      <section className="bg-gradient-to-r from-primary-green to-secondary-blue text-white py-16">
-        <div className="container-custom">
-          <h1 className="text-4xl font-display font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-xl text-white/90">
-            Find answers to common questions about our services
-          </p>
+      <section className="relative bg-gradient-to-r from-primary-green via-secondary-blue to-primary-green text-white pt-28 pb-32 overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute inset-0 bg-pattern" />
+        </div>
+        <div className="container-custom relative">
+          <AnimationWrapper animation="fade-up">
+            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">Frequently Asked Questions</h1>
+          </AnimationWrapper>
+          <AnimationWrapper animation="fade-up" delay={100}>
+            <p className="text-xl text-white/80">Find answers to common questions about our services</p>
+          </AnimationWrapper>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 -mt-16 relative">
         <div className="container-custom max-w-4xl">
-          <div className="space-y-4">
+          <StaggerContainer staggerDelay={80} className="space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <details className="group">
-                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                    <h2 className="text-lg font-semibold text-neutral-dark pr-4">
-                      {faq.q}
-                    </h2>
-                    <ChevronDown className="w-5 h-5 text-neutral-gray group-open:rotate-180 transition-transform flex-shrink-0" />
-                  </summary>
-                  <div className="px-6 pb-6 pt-0 text-neutral-gray">
-                    {faq.a}
-                  </div>
-                </details>
+              <div key={index} className="stagger-item">
+                <FAQItem faq={faq} />
               </div>
             ))}
-          </div>
+          </StaggerContainer>
 
-          <div className="mt-12 bg-secondary-blue text-white rounded-xl p-8 text-center">
-            <HelpCircle className="w-12 h-12 mx-auto mb-4 text-primary-gold" />
-            <h2 className="text-2xl font-bold mb-4">Still have questions?</h2>
-            <p className="text-white/90 mb-6">
-              Our team is ready to help with any inquiries about our products and services.
-            </p>
-            <a
-              href="https://wa.me/8613888888888"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              Contact Us via WhatsApp
-            </a>
-          </div>
+          <AnimationWrapper animation="fade-up" className="mt-16 bg-gradient-to-r from-primary-green via-secondary-blue to-primary-green rounded-2xl p-10 text-center text-white relative overflow-hidden">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute inset-0 bg-pattern" />
+            </div>
+            <div className="relative">
+              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6">
+                <HelpCircle className="w-8 h-8 text-primary-gold" />
+              </div>
+              <h2 className="text-2xl font-display font-bold mb-4">Still have questions?</h2>
+              <p className="text-white/80 mb-8 max-w-md mx-auto">
+                Our team is ready to help with any inquiries about our products and services.
+              </p>
+              <a
+                href="https://wa.me/8613888888888"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex"
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Contact Us via WhatsApp
+              </a>
+            </div>
+          </AnimationWrapper>
         </div>
       </section>
     </div>

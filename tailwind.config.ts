@@ -12,6 +12,7 @@ const config: Config = {
         primary: {
           green: "#0D5C3D",
           gold: "#D4A537",
+          goldLight: "#E8C86A",
           rust: "#C65D3B",
         },
         secondary: {
@@ -23,27 +24,24 @@ const config: Config = {
           dark: "#2D3748",
           gray: "#718096",
           light: "#E2E8F0",
-          bg: "#F7FAFC",
+          bg: "#FAF7F2",
         },
       },
       fontFamily: {
-        sans: ["Inter", "Noto Sans SC", "sans-serif"],
-        display: ["Montserrat", "Noto Sans SC", "sans-serif"],
+        sans: ['Plus Jakarta Sans', 'Noto Sans SC', 'sans-serif'],
+        display: ['Syne', 'Noto Sans SC', 'sans-serif'],
       },
       animation: {
-        "fade-in": "fadeIn 0.6s ease-out forwards",
-        "fade-in-up": "fadeInUp 0.6s ease-out forwards",
-        "fade-in-down": "fadeInDown 0.6s ease-out forwards",
-        "slide-up": "slideUp 0.5s ease-out",
-        "slide-down": "slideDown 0.5s ease-out",
-        "float": "float 3s ease-in-out infinite",
+        "fade-in": "fadeIn 0.8s ease-out forwards",
+        "fade-in-up": "fadeInUp 0.8s ease-out forwards",
+        "fade-in-down": "fadeInDown 0.8s ease-out forwards",
+        "slide-up": "slideUp 0.6s ease-out forwards",
+        "slide-down": "slideDown 0.6s ease-out forwards",
+        "float": "float 6s ease-in-out infinite",
+        "float-slow": "float 8s ease-in-out infinite",
         "pulse-glow": "pulseGlow 2s ease-in-out infinite",
         "shimmer": "shimmer 2s linear infinite",
-        "bounce-in": "bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
-        "scale-in": "scaleIn 0.3s ease-out forwards",
-        "rotate-in": "rotateIn 0.5s ease-out forwards",
-        "slide-in-left": "slideInLeft 0.6s ease-out forwards",
-        "slide-in-right": "slideInRight 0.6s ease-out forwards",
+        "spin-slow": "spinSlow 20s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -51,59 +49,45 @@ const config: Config = {
           "100%": { opacity: "1" },
         },
         fadeInUp: {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "0%": { opacity: "0", transform: "translateY(40px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         fadeInDown: {
-          "0%": { opacity: "0", transform: "translateY(-30px)" },
+          "0%": { opacity: "0", transform: "translateY(-40px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         slideUp: {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "0%": { opacity: "0", transform: "translateY(30px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         slideDown: {
-          "0%": { opacity: "0", transform: "translateY(-20px)" },
+          "0%": { opacity: "0", transform: "translateY(-30px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
+          "50%": { transform: "translateY(-20px)" },
         },
         pulseGlow: {
           "0%, 100%": { boxShadow: "0 0 5px rgba(212, 165, 55, 0.5)" },
-          "50%": { boxShadow: "0 0 20px rgba(212, 165, 55, 0.8), 0 0 30px rgba(212, 165, 55, 0.4)" },
+          "50%": { boxShadow: "0 0 25px rgba(212, 165, 55, 0.8), 0 0 35px rgba(212, 165, 55, 0.4)" },
         },
         shimmer: {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
-        bounceIn: {
-          "0%": { opacity: "0", transform: "scale(0.3)" },
-          "50%": { transform: "scale(1.05)" },
-          "70%": { transform: "scale(0.9)" },
-          "100%": { opacity: "1", transform: "scale(1)" },
-        },
-        scaleIn: {
-          "0%": { opacity: "0", transform: "scale(0.8)" },
-          "100%": { opacity: "1", transform: "scale(1)" },
-        },
-        rotateIn: {
-          "0%": { opacity: "0", transform: "rotate(-10deg) scale(0.9)" },
-          "100%": { opacity: "1", transform: "rotate(0) scale(1)" },
-        },
-        slideInLeft: {
-          "0%": { opacity: "0", transform: "translateX(-40px)" },
-          "100%": { opacity: "1", transform: "translateX(0)" },
-        },
-        slideInRight: {
-          "0%": { opacity: "0", transform: "translateX(40px)" },
-          "100%": { opacity: "1", transform: "translateX(0)" },
+        spinSlow: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
       },
       transitionTimingFunction: {
         'bounce-out': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+      boxShadow: {
+        'glow': '0 0 20px rgba(212, 165, 55, 0.3)',
+        'glow-lg': '0 0 40px rgba(212, 165, 55, 0.4)',
       },
     },
   },

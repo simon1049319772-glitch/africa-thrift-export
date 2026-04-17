@@ -7,7 +7,7 @@ interface AnimationWrapperProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  animation?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale" | "zoom";
+  animation?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale" | "zoom" | "fade";
   once?: boolean;
 }
 
@@ -23,6 +23,8 @@ export function AnimationWrapper({
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
+
+    element.classList.add("animate-on-scroll");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -48,19 +50,19 @@ export function AnimationWrapper({
   }, [delay, once]);
 
   const animationClasses: Record<string, string> = {
-    "fade-up": "translate-y-8",
-    "fade-down": "-translate-y-8",
-    "fade-left": "translate-x-8",
-    "fade-right": "-translate-x-8",
-    "scale": "scale-90",
-    "zoom": "scale-50",
+    "fade-up": "translate-y-12",
+    "fade-down": "-translate-y-12",
+    "fade-left": "-translate-x-12",
+    "fade-right": "translate-x-12",
+    "scale": "scale-95",
+    "zoom": "scale-90",
+    "fade": "",
   };
 
   return (
     <div
       ref={ref}
       className={cn(
-        "opacity-0 transition-all duration-700 ease-smooth",
         animationClasses[animation],
         className
       )}
