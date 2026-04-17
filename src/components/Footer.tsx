@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle, ArrowUpRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const footerLinks = {
   products: [
@@ -31,19 +35,35 @@ const targetCountries = [
   { name: "Tanzania", flag: "🇹🇿" },
 ];
 
+const socialLinks = [
+  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+  { icon: MessageCircle, href: "https://wa.me/8613888888888", label: "WhatsApp" },
+];
+
 export function Footer() {
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
+
   return (
-    <footer className="bg-secondary-blue text-white">
-      <div className="container-custom py-16">
+    <footer className="bg-secondary-blue text-white relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-gold rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-green rounded-full blur-3xl" />
+      </div>
+
+      <div className="container-custom relative py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+            <div className="flex items-center gap-2 mb-4 group cursor-pointer">
+              <div className="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-lg shadow-primary-gold/30">
                 <span className="text-secondary-blue font-bold text-xl">A</span>
               </div>
-              <span className="font-display font-bold text-xl">AfriThrift</span>
+              <span className="font-display font-bold text-xl group-hover:text-primary-gold transition-colors">
+                AfriThrift
+              </span>
             </div>
-            <p className="text-gray-300 mb-6 max-w-md">
+            <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
               Your trusted partner for premium used clothing export to Africa.
               We source directly, inspect quality, and deliver reliability.
             </p>
@@ -51,62 +71,77 @@ export function Footer() {
             <div className="space-y-3 mb-6">
               <a
                 href="tel:+8613888888888"
-                className="flex items-center gap-3 text-gray-300 hover:text-primary-gold transition-colors"
+                className="flex items-center gap-3 text-gray-300 hover:text-primary-gold transition-colors duration-300 group"
               >
-                <Phone className="w-5 h-5" />
-                +86 138 8888 8888
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-primary-gold/20 transition-colors">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <span>+86 138 8888 8888</span>
               </a>
               <a
                 href="mailto:info@afrithrift.com"
-                className="flex items-center gap-3 text-gray-300 hover:text-primary-gold transition-colors"
+                className="flex items-center gap-3 text-gray-300 hover:text-primary-gold transition-colors duration-300 group"
               >
-                <Mail className="w-5 h-5" />
-                info@afrithrift.com
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-primary-gold/20 transition-colors">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <span>info@afrithrift.com</span>
               </a>
               <div className="flex items-start gap-3 text-gray-300">
-                <MapPin className="w-5 h-5 mt-0.5" />
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
                 <span>Guangzhou, China</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-gold transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-gold transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://wa.me/8613888888888"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-gold transition-colors"
-              >
-                <MessageCircle className="w-5 h-5" />
-              </a>
+            <div className="flex items-center gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  onMouseEnter={() => setHoveredSocial(social.label)}
+                  onMouseLeave={() => setHoveredSocial(null)}
+                  className={cn(
+                    "w-11 h-11 bg-white/10 rounded-full flex items-center justify-center",
+                    "transition-all duration-300 ease-smooth",
+                    "hover:bg-primary-gold hover:scale-110 hover:shadow-lg hover:shadow-primary-gold/30"
+                  )}
+                  style={{
+                    transform: hoveredSocial === social.label ? "translateY(-3px) scale(1.1)" : "none",
+                  }}
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Products</h3>
+            <h3 className="font-semibold mb-4 relative inline-block">
+              Products
+              <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-primary-gold rounded" />
+            </h3>
             <ul className="space-y-3">
               {footerLinks.products.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-primary-gold transition-colors"
+                    onMouseEnter={() => setHoveredLink(link.name)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    className={cn(
+                      "text-gray-300 flex items-center gap-2 transition-all duration-300",
+                      "hover:text-primary-gold",
+                      hoveredLink === link.name && "translate-x-2 text-primary-gold"
+                    )}
                   >
                     {link.name}
+                    {hoveredLink === link.name && (
+                      <ArrowUpRight className="w-3 h-3 animate-scale-in" />
+                    )}
                   </Link>
                 </li>
               ))}
@@ -114,15 +149,27 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Company</h3>
+            <h3 className="font-semibold mb-4 relative inline-block">
+              Company
+              <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-primary-gold rounded" />
+            </h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-primary-gold transition-colors"
+                    onMouseEnter={() => setHoveredLink(link.name)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    className={cn(
+                      "text-gray-300 flex items-center gap-2 transition-all duration-300",
+                      "hover:text-primary-gold",
+                      hoveredLink === link.name && "translate-x-2 text-primary-gold"
+                    )}
                   >
                     {link.name}
+                    {hoveredLink === link.name && (
+                      <ArrowUpRight className="w-3 h-3 animate-scale-in" />
+                    )}
                   </Link>
                 </li>
               ))}
@@ -130,27 +177,42 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Support</h3>
+            <h3 className="font-semibold mb-4 relative inline-block">
+              Support
+              <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-primary-gold rounded" />
+            </h3>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-primary-gold transition-colors"
+                    onMouseEnter={() => setHoveredLink(link.name)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    className={cn(
+                      "text-gray-300 flex items-center gap-2 transition-all duration-300",
+                      "hover:text-primary-gold",
+                      hoveredLink === link.name && "translate-x-2 text-primary-gold"
+                    )}
                   >
                     {link.name}
+                    {hoveredLink === link.name && (
+                      <ArrowUpRight className="w-3 h-3 animate-scale-in" />
+                    )}
                   </Link>
                 </li>
               ))}
             </ul>
 
             <div className="mt-8">
-              <h4 className="font-semibold mb-3">We Ship To</h4>
+              <h4 className="font-semibold mb-3 relative inline-block">
+                We Ship To
+                <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-primary-gold rounded" />
+              </h4>
               <div className="flex flex-wrap gap-2">
                 {targetCountries.map((country) => (
                   <span
                     key={country.name}
-                    className="px-2 py-1 bg-white/10 rounded text-sm"
+                    className="px-3 py-1.5 bg-white/10 rounded-lg text-sm hover:bg-primary-gold/20 hover:text-primary-gold transition-all duration-300 cursor-default"
                   >
                     {country.flag} {country.name}
                   </span>
@@ -165,12 +227,20 @@ export function Footer() {
             <p className="text-gray-400 text-sm">
               © 2024-{new Date().getFullYear()} AfriThrift. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm text-gray-400">
-              <Link href="/privacy" className="hover:text-white transition-colors">
+            <div className="flex gap-6 text-sm">
+              <Link 
+                href="/privacy" 
+                className="text-gray-400 hover:text-white transition-colors relative group"
+              >
                 Privacy Policy
+                <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
               </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
+              <Link 
+                href="/terms" 
+                className="text-gray-400 hover:text-white transition-colors relative group"
+              >
                 Terms of Service
+                <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
               </Link>
             </div>
           </div>

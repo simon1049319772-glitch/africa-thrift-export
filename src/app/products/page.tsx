@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Filter, Grid, List } from "lucide-react";
+import { Filter, Grid, List, Package, Zap } from "lucide-react";
 import { categories, products } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
+import { AnimationWrapper, StaggerContainer } from "@/components/AnimationWrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -27,46 +28,50 @@ export default async function ProductsPage({ searchParams }: Props) {
   return (
     <div className="bg-neutral-bg min-h-screen">
       <div className="container-custom py-8">
-        <div className="mb-8">
+        <AnimationWrapper animation="fade-up" className="mb-8">
           <h1 className="text-3xl font-display font-bold text-neutral-dark mb-2">
             {currentCategory?.name ?? "All Products"}
           </h1>
-          <p className="text-neutral-gray">
+          <p className="text-neutral-gray flex items-center gap-2">
+            <Package className="w-4 h-4" />
             {filteredProducts.length} products available
           </p>
-        </div>
+        </AnimationWrapper>
 
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="lg:w-64 flex-shrink-0">
-            <div className="bg-white rounded-xl shadow-sm p-6 sticky top-24">
+            <AnimationWrapper animation="fade-left" className="bg-white rounded-xl shadow-sm p-6 sticky top-24">
               <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                <Filter className="w-5 h-5" />
+                <Filter className="w-5 h-5 text-primary-green" />
                 Categories
               </h2>
               <nav className="space-y-2">
                 <Link
                   href="/products"
-                  className={`block px-3 py-2 rounded-lg transition-colors ${
+                  className={`block px-3 py-2 rounded-lg transition-all duration-300 flex justify-between items-center group ${
                     !categorySlug
                       ? "bg-primary-green text-white"
                       : "hover:bg-neutral-light text-neutral-dark"
                   }`}
                 >
-                  All Products
+                  <span>All Products</span>
+                  {categorySlug === undefined && (
+                    <ArrowIcon className="w-4 h-4" />
+                  )}
                 </Link>
                 {categories.map((cat) => (
                   <Link
                     key={cat.id}
                     href={`/products?category=${cat.slug}`}
-                    className={`block px-3 py-2 rounded-lg transition-colors flex justify-between items-center ${
+                    className={`block px-3 py-2 rounded-lg transition-all duration-300 flex justify-between items-center group ${
                       categorySlug === cat.slug
                         ? "bg-primary-green text-white"
                         : "hover:bg-neutral-light text-neutral-dark"
                     }`}
                   >
                     <span>{cat.name}</span>
-                    <span className={`text-sm ${
-                      categorySlug === cat.slug ? "text-white/80" : "text-neutral-gray"
+                    <span className={`text-sm flex items-center gap-1 ${
+                      categorySlug === cat.slug ? "text-white/80" : "text-neutral-gray group-hover:text-primary-green"
                     }`}>
                       ({cat.productCount})
                     </span>
@@ -78,12 +83,12 @@ export default async function ProductsPage({ searchParams }: Props) {
                 <h2 className="font-semibold text-lg mb-4">Grade</h2>
                 <div className="space-y-2">
                   {["A", "B", "C"].map((grade) => (
-                    <label key={grade} className="flex items-center gap-2 cursor-pointer">
+                    <label key={grade} className="flex items-center gap-2 cursor-pointer group">
                       <input
                         type="checkbox"
-                        className="w-4 h-4 rounded border-gray-300 text-primary-green focus:ring-primary-green"
+                        className="w-4 h-4 rounded border-gray-300 text-primary-green focus:ring-primary-green transition-colors"
                       />
-                      <span className="text-neutral-dark">Grade {grade}</span>
+                      <span className="text-neutral-dark group-hover:text-primary-green transition-colors">Grade {grade}</span>
                     </label>
                   ))}
                 </div>
@@ -93,21 +98,21 @@ export default async function ProductsPage({ searchParams }: Props) {
                 <h2 className="font-semibold text-lg mb-4">Origin</h2>
                 <div className="space-y-2">
                   {["USA", "Europe", "Japan"].map((origin) => (
-                    <label key={origin} className="flex items-center gap-2 cursor-pointer">
+                    <label key={origin} className="flex items-center gap-2 cursor-pointer group">
                       <input
                         type="checkbox"
-                        className="w-4 h-4 rounded border-gray-300 text-primary-green focus:ring-primary-green"
+                        className="w-4 h-4 rounded border-gray-300 text-primary-green focus:ring-primary-green transition-colors"
                       />
-                      <span className="text-neutral-dark">{origin}</span>
+                      <span className="text-neutral-dark group-hover:text-primary-green transition-colors">{origin}</span>
                     </label>
                   ))}
                 </div>
               </div>
-            </div>
+            </AnimationWrapper>
           </aside>
 
           <div className="flex-1">
-            <div className="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <AnimationWrapper animation="fade-up" delay={100} className="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
               <p className="text-neutral-gray">
                 Showing <span className="font-semibold text-neutral-dark">{filteredProducts.length}</span> products
               </p>
@@ -115,7 +120,7 @@ export default async function ProductsPage({ searchParams }: Props) {
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <span className="text-neutral-gray text-sm">Sort by:</span>
-                  <select className="border border-neutral-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-green">
+                  <select className="border border-neutral-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-green transition-all hover:border-primary-green">
                     <option>Newest First</option>
                     <option>Price: Low to High</option>
                     <option>Price: High to Low</option>
@@ -124,18 +129,18 @@ export default async function ProductsPage({ searchParams }: Props) {
                 </div>
 
                 <div className="hidden sm:flex items-center gap-2 border-l pl-4">
-                  <button className="p-2 rounded-lg bg-primary-green text-white">
+                  <button className="p-2 rounded-lg bg-primary-green text-white shadow-md">
                     <Grid className="w-5 h-5" />
                   </button>
-                  <button className="p-2 rounded-lg hover:bg-neutral-light text-neutral-gray">
+                  <button className="p-2 rounded-lg hover:bg-neutral-light text-neutral-gray transition-colors">
                     <List className="w-5 h-5" />
                   </button>
                 </div>
               </div>
-            </div>
+            </AnimationWrapper>
 
             {filteredProducts.length === 0 ? (
-              <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+              <AnimationWrapper animation="fade-up" className="bg-white rounded-xl shadow-sm p-12 text-center">
                 <div className="w-16 h-16 bg-neutral-light rounded-full flex items-center justify-center mx-auto mb-4">
                   <Grid className="w-8 h-8 text-neutral-gray" />
                 </div>
@@ -148,36 +153,40 @@ export default async function ProductsPage({ searchParams }: Props) {
                 <Link href="/products" className="btn-secondary">
                   View All Products
                 </Link>
-              </div>
+              </AnimationWrapper>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+              <StaggerContainer staggerDelay={80} className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredProducts.map((product) => (
                   <Link
                     key={product.id}
                     href={`/products/${product.slug}`}
-                    className="card group"
+                    className="stagger-item card-interactive group"
                   >
-                    <div className="relative aspect-square overflow-hidden">
+                    <div className="relative aspect-square overflow-hidden rounded-t-xl">
                       <Image
                         src={product.images[0]}
                         alt={product.name}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="card-image object-cover"
                         sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                         loading="lazy"
                       />
-                      <span className="absolute top-3 left-3 px-2 py-1 bg-primary-rust text-white text-xs font-medium rounded">
+                      <span className="badge badge-primary absolute top-3 left-3 opacity-90 group-hover:scale-105 transition-transform">
                         Grade {product.grade}
                       </span>
-                      <span className="absolute top-3 right-3 px-2 py-1 bg-secondary-blue/90 text-white text-xs rounded">
+                      <span className="absolute top-3 right-3 px-2 py-1 bg-secondary-blue/90 backdrop-blur-sm text-white text-xs rounded flex items-center gap-1">
                         {product.origin}
                       </span>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span className="btn-primary text-sm">View Details</span>
+                      </div>
                     </div>
                     <div className="p-4">
-                      <p className="text-xs text-neutral-gray mb-1">
+                      <p className="text-xs text-neutral-gray mb-1 flex items-center gap-1">
+                        <Package className="w-3 h-3" />
                         {product.categoryName}
                       </p>
-                      <h3 className="font-medium text-neutral-dark mb-2 line-clamp-2 min-h-[3rem]">
+                      <h3 className="font-medium text-neutral-dark mb-2 line-clamp-2 min-h-[3rem] group-hover:text-primary-green transition-colors">
                         {product.name}
                       </h3>
                       <div className="flex items-center justify-between mb-2">
@@ -187,7 +196,8 @@ export default async function ProductsPage({ searchParams }: Props) {
                           </span>
                           <span className="text-xs text-neutral-gray">/pc</span>
                         </div>
-                        <span className="text-xs text-neutral-gray">
+                        <span className="text-xs text-neutral-gray flex items-center gap-1">
+                          <Zap className="w-3 h-3 text-primary-gold" />
                           MOQ: {product.moq}
                         </span>
                       </div>
@@ -197,11 +207,28 @@ export default async function ProductsPage({ searchParams }: Props) {
                     </div>
                   </Link>
                 ))}
-              </div>
+              </StaggerContainer>
             )}
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function ArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
   );
 }
