@@ -61,6 +61,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                       alt={`${product.name} - Image ${idx + 1}`}
                       fill
                       className="object-cover"
+                      loading="lazy"
                     />
                   </button>
                 ))}
