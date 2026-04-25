@@ -82,7 +82,7 @@ export default function TermsPage() {
 
               <h2 className="font-display text-2xl font-bold text-neutral-dark mb-4">9. Contact Information</h2>
               <p className="text-neutral-gray leading-relaxed">
-                For questions about these terms, please contact us at <a href="mailto:info@afrithrift.com" className="text-primary-green hover:underline">info@afrithrift.com</a> or via WhatsApp.
+                For questions about these terms, please contact us at <a href="mailto:simon1049319772@gmail.com" className="text-primary-green hover:underline">simon1049319772@gmail.com</a> or via WhatsApp.
               </p>
             </div>
           </AnimationWrapper>

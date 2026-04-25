@@ -157,7 +157,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
 
               <div className="space-y-4 mb-8">
                 <a
-                  href="https://wa.me/8613888888888"
+                  href="https://wa.me/8613702915479"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary w-full justify-center text-lg"

@@ -36,7 +36,7 @@ const targetCountries = [
 const socialLinks = [
   { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
   { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: MessageCircle, href: "https://wa.me/8613888888888", label: "WhatsApp" },
+  { icon: MessageCircle, href: "https://wa.me/8613702915479", label: "WhatsApp" },
 ];
 
 export function Footer() {
@@ -76,22 +76,22 @@ export function Footer() {
 
             <div className="space-y-2 mb-8">
               <a
-                href="tel:+8613888888888"
+                href="tel:+8613702915479"
                 className="flex items-center gap-3 min-h-[48px] px-3 -mx-3 text-white/70 hover:text-primary-gold transition-colors group rounded-xl hover:bg-white/5"
               >
                 <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-primary-gold/20 transition-colors">
                   <Phone className="w-5 h-5" />
                 </div>
-                <span>+86 138 8888 8888</span>
+                <span>+86 137 0291 5479</span>
               </a>
               <a
-                href="mailto:info@afrithrift.com"
+                href="mailto:simon1049319772@gmail.com, 1049319772@qq.com"
                 className="flex items-center gap-3 min-h-[48px] px-3 -mx-3 text-white/70 hover:text-primary-gold transition-colors group rounded-xl hover:bg-white/5"
               >
                 <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-primary-gold/20 transition-colors">
                   <Mail className="w-5 h-5" />
                 </div>
-                <span>info@afrithrift.com</span>
+                <span>simon1049319772@gmail.com, 1049319772@qq.com</span>
               </a>
               <div className="flex items-start gap-3 min-h-[48px] px-3 -mx-3 text-white/70 py-2 rounded-xl hover:bg-white/5">
                 <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">

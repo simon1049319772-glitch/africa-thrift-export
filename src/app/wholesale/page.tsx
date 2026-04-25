@@ -295,7 +295,7 @@ export default function WholesalePage() {
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <a
-                  href="https://wa.me/8613888888888"
+                  href="https://wa.me/8613702915479"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline-white text-lg"

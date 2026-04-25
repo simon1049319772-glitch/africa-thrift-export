@@ -76,7 +76,7 @@ export default function ContactPage() {
                 Your inquiry has been submitted successfully. Our sales team will contact you within 24 hours via WhatsApp or email.
               </p>
               <a
-                href="https://wa.me/8613888888888"
+                href="https://wa.me/8613702915479"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
@@ -284,7 +284,7 @@ export default function ContactPage() {
               <h3 className="font-display font-bold text-xl text-neutral-dark mb-6">Quick Contact</h3>
               <div className="space-y-4">
                 <a
-                  href="https://wa.me/8613888888888"
+                  href="https://wa.me/8613702915479"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 bg-secondary-green/10 rounded-xl hover:bg-secondary-green/20 transition-colors group"
@@ -298,7 +298,7 @@ export default function ContactPage() {
                   </div>
                 </a>
                 <a
-                  href="tel:+8613888888888"
+                  href="tel:+8613702915479"
                   className="flex items-center gap-4 p-4 bg-primary-green/10 rounded-xl hover:bg-primary-green/20 transition-colors group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary-green flex items-center justify-center">
@@ -310,7 +310,7 @@ export default function ContactPage() {
                   </div>
                 </a>
                 <a
-                  href="mailto:info@afrithrift.com"
+                  href="mailto:simon1049319772@gmail.com"
                   className="flex items-center gap-4 p-4 bg-secondary-blue/10 rounded-xl hover:bg-secondary-blue/20 transition-colors group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-secondary-blue flex items-center justify-center">
@@ -318,7 +318,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-neutral-dark">Email</p>
-                    <p className="text-sm text-neutral-gray">info@afrithrift.com</p>
+                    <p className="text-sm text-neutral-gray">simon1049319772@gmail.com</p>
                   </div>
                 </a>
               </div>

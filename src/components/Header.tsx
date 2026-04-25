@@ -144,7 +144,7 @@ export function Header() {
             </button>
 
             <a
-              href="https://wa.me/8613888888888"
+              href="https://wa.me/8613702915479"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary flex items-center gap-2"
@@ -215,7 +215,7 @@ export function Header() {
             ))}
             <div className="pt-4 border-t border-neutral-light mt-4">
               <a
-                href="https://wa.me/8613888888888"
+                href="https://wa.me/8613702915479"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary text-center w-full min-h-[52px] text-base"

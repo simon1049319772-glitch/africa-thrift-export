@@ -102,7 +102,7 @@ export default function FAQPage() {
                 Our team is ready to help with any inquiries about our products and services.
               </p>
               <a
-                href="https://wa.me/8613888888888"
+                href="https://wa.me/8613702915479"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex"

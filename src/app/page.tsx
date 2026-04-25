@@ -485,7 +485,7 @@ export default async function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-5 justify-center">
                 <a
-                  href="https://wa.me/8613888888888"
+                  href="https://wa.me/8613702915479"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary text-lg group"

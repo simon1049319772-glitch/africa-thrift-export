@@ -111,7 +111,7 @@ export default function PrivacyPage() {
               <div className="pt-8 border-t border-neutral-light">
                 <h3 className="font-display text-xl font-bold text-neutral-dark mb-4">Contact Us</h3>
                 <p className="text-neutral-gray leading-relaxed">
-                  For privacy-related questions or to exercise your rights, contact us at <a href="mailto:info@afrithrift.com" className="text-primary-green hover:underline font-semibold">info@afrithrift.com</a> or via WhatsApp.
+                  For privacy-related questions or to exercise your rights, contact us at <a href="mailto:simon1049319772@gmail.com" className="text-primary-green hover:underline font-semibold">simon1049319772@gmail.com</a> or via WhatsApp.
                 </p>
               </div>
             </div>
