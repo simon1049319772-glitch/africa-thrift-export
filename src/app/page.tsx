@@ -47,26 +47,26 @@ export default async function HomePage() {
               </AnimationWrapper>
               
               <AnimationWrapper animation="fade-up" delay={100}>
-                <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6 leading-[1.1] tracking-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white mb-4 sm:mb-6 leading-[1.1] tracking-tight">
                   Premium Used Clothing for{" "}
                   <span className="text-gradient">Africa</span>
                 </h1>
               </AnimationWrapper>
               
               <AnimationWrapper animation="fade-up" delay={200}>
-                <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-xl leading-relaxed font-light">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/80 mb-6 sm:mb-10 max-w-xl leading-relaxed font-light">
                   Direct sourcing from USA & Europe. Professional 3-level quality inspection.
                   Reliable sea freight to Nigeria, Ghana, Kenya & 50+ countries.
                 </p>
               </AnimationWrapper>
               
               <AnimationWrapper animation="fade-up" delay={300}>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/products" className="btn-primary text-lg group">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <Link href="/products" className="btn-primary text-base sm:text-lg group">
                     Start Shopping
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Link>
-                  <Link href="/wholesale" className="btn-outline-white text-lg group">
+                  <Link href="/wholesale" className="btn-outline-white text-base sm:text-lg group">
                     Wholesale Plans
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Link>
@@ -74,18 +74,18 @@ export default async function HomePage() {
               </AnimationWrapper>
 
               <AnimationWrapper animation="fade-up" delay={500}>
-                <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/20">
+                <div className="grid grid-cols-3 gap-4 sm:gap-8 mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/20">
                   {[
                     { value: "10+", label: "Years Experience", icon: TrendingUp },
                     { value: "15K+", label: "Happy Customers", icon: Users },
                     { value: "50+", label: "Countries", icon: Globe },
                   ].map((stat, i) => (
-                    <div key={i} className="hover-lift cursor-default">
-                      <div className="flex items-center gap-2 mb-1">
-                        <stat.icon className="w-5 h-5 text-primary-gold" />
-                        <div className="text-3xl font-bold text-primary-gold">{stat.value}</div>
+                    <div key={i} className="hover-lift cursor-default text-center sm:text-left">
+                      <div className="flex sm:items-center gap-2 mb-1">
+                        <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary-gold" />
+                        <div className="text-2xl sm:text-3xl font-bold text-primary-gold">{stat.value}</div>
                       </div>
-                      <div className="text-white/60 text-sm">{stat.label}</div>
+                      <div className="text-white/60 text-xs sm:text-sm">{stat.label}</div>
                     </div>
                   ))}
                 </div>

@@ -22,92 +22,92 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
 
   return (
     <div className="bg-neutral-bg min-h-screen">
-      <div className="container-custom py-8">
-        <nav className="flex items-center gap-2 text-sm text-neutral-gray mb-6">
-          <Link href="/" className="hover:text-primary-green">Home</Link>
-          <ChevronRight className="w-4 h-4" />
-          <Link href="/products" className="hover:text-primary-green">Products</Link>
-          <ChevronRight className="w-4 h-4" />
-          <Link href={`/products?category=${product.categorySlug}`} className="hover:text-primary-green">
-            {product.categoryName}
-          </Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-neutral-dark">{product.name}</span>
-        </nav>
+      <div className="container-custom py-6 sm:py-8">
+          <nav className="flex items-center gap-2 text-xs sm:text-sm text-neutral-gray mb-4 sm:mb-6 overflow-x-auto">
+            <Link href="/" className="hover:text-primary-green whitespace-nowrap">Home</Link>
+            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <Link href="/products" className="hover:text-primary-green whitespace-nowrap">Products</Link>
+            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <Link href={`/products?category=${product.categorySlug}`} className="hover:text-primary-green whitespace-nowrap">
+              {product.categoryName}
+            </Link>
+            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <span className="text-neutral-dark whitespace-nowrap">{product.name}</span>
+          </nav>
 
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-12">
-          <div className="grid lg:grid-cols-2 gap-8 p-8">
-            <div>
-              <div className="relative aspect-square rounded-xl overflow-hidden mb-4">
-                <Image
-                  src={product.images[selectedImage]}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                  priority
-                />
+          <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-8 sm:mb-12">
+            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 p-4 sm:p-8">
+              <div>
+                <div className="relative aspect-square rounded-xl overflow-hidden mb-3 sm:mb-4">
+                  <Image
+                    src={product.images[selectedImage]}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                <div className="grid grid-cols-5 gap-2">
+                  {product.images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedImage(idx)}
+                      className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-colors touch-manipulation ${
+                        selectedImage === idx ? "border-primary-green" : "border-transparent"
+                      }`}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${product.name} - Image ${idx + 1}`}
+                        fill
+                        className="object-cover"
+                        loading="lazy"
+                      />
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-5 gap-2">
-                {product.images.map((img, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedImage(idx)}
-                    className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
-                      selectedImage === idx ? "border-primary-green" : "border-transparent"
-                    }`}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${product.name} - Image ${idx + 1}`}
-                      fill
-                      className="object-cover"
-                      loading="lazy"
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            <div>
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <p className="text-sm text-neutral-gray mb-1">{product.categoryName}</p>
-                  <h1 className="text-2xl md:text-3xl font-display font-bold text-neutral-dark mb-2">
-                    {product.name}
-                  </h1>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="px-3 py-1 bg-primary-rust text-white text-sm rounded-full">
-                      Grade {product.grade}
-                    </span>
-                    <span className="px-3 py-1 bg-secondary-blue text-white text-sm rounded-full">
-                      {product.origin} Origin
-                    </span>
+              <div>
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <p className="text-sm text-neutral-gray mb-1">{product.categoryName}</p>
+                    <h1 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-neutral-dark mb-2">
+                      {product.name}
+                    </h1>
+                    <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
+                      <span className="px-3 py-1 bg-primary-rust text-white text-sm rounded-full">
+                        Grade {product.grade}
+                      </span>
+                      <span className="px-3 py-1 bg-secondary-blue text-white text-sm rounded-full">
+                        {product.origin} Origin
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex gap-1 sm:gap-2">
+                    <button className="p-2.5 sm:p-2 rounded-lg border border-neutral-light hover:bg-neutral-light transition-colors touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center">
+                      <Heart className="w-5 h-5 text-neutral-gray" />
+                    </button>
+                    <button className="p-2.5 sm:p-2 rounded-lg border border-neutral-light hover:bg-neutral-light transition-colors touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center">
+                      <Share2 className="w-5 h-5 text-neutral-gray" />
+                    </button>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <button className="p-2 rounded-lg border border-neutral-light hover:bg-neutral-light transition-colors">
-                    <Heart className="w-5 h-5 text-neutral-gray" />
-                  </button>
-                  <button className="p-2 rounded-lg border border-neutral-light hover:bg-neutral-light transition-colors">
-                    <Share2 className="w-5 h-5 text-neutral-gray" />
-                  </button>
-                </div>
-              </div>
 
-              <div className="mb-6">
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-4xl font-bold text-primary-green">
-                    {formatPrice(product.price)}
-                  </span>
-                  <span className="text-lg text-neutral-gray">/ piece</span>
+                <div className="mb-4 sm:mb-6">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-3xl sm:text-4xl font-bold text-primary-green">
+                      {formatPrice(product.price)}
+                    </span>
+                    <span className="text-base sm:text-lg text-neutral-gray">/ piece</span>
+                  </div>
+                  <p className="text-sm text-neutral-gray">
+                    MOQ: {product.moq} pieces | Weight: {product.weight}kg/pc
+                  </p>
                 </div>
-                <p className="text-sm text-neutral-gray">
-                  MOQ: {product.moq} pieces | Weight: {product.weight}kg/pc
-                </p>
-              </div>
 
-              <div className="border-t border-b border-neutral-light py-6 mb-6">
-                <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="border-t border-b border-neutral-light py-4 sm:py-6 mb-4 sm:mb-6">
+                <div className="grid grid-cols-2 gap-4 mb-4 sm:mb-6">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-secondary-green/10 rounded-full flex items-center justify-center">
                       <CheckCircle className="w-5 h-5 text-secondary-green" />
@@ -128,12 +128,12 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 sm:gap-4">
                   <span className="font-medium text-neutral-dark">Quantity:</span>
                   <div className="flex items-center border border-neutral-light rounded-lg">
                     <button
                       onClick={decreaseQty}
-                      className="p-3 hover:bg-neutral-light transition-colors"
+                      className="p-3 min-w-[44px] min-h-[44px] hover:bg-neutral-light transition-colors touch-manipulation"
                       disabled={quantity <= product.moq}
                     >
                       <Minus className="w-4 h-4" />
@@ -142,12 +142,12 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                       type="number"
                       value={quantity}
                       onChange={(e) => setQuantity(Math.max(product.moq, parseInt(e.target.value) || product.moq))}
-                      className="w-20 text-center border-x border-neutral-light py-2"
+                      className="w-16 sm:w-20 text-center border-x border-neutral-light py-2 min-h-[44px]"
                       min={product.moq}
                     />
                     <button
                       onClick={increaseQty}
-                      className="p-3 hover:bg-neutral-light transition-colors"
+                      className="p-3 min-w-[44px] min-h-[44px] hover:bg-neutral-light transition-colors touch-manipulation"
                     >
                       <Plus className="w-4 h-4" />
                     </button>

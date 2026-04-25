@@ -155,20 +155,20 @@ export function Header() {
           </div>
 
           <button
-            className="lg:hidden p-2 text-neutral-dark hover:text-primary-green transition-colors"
+            className="lg:hidden p-3 -m-1 text-neutral-dark hover:text-primary-green transition-colors touch-manipulation"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <div className="relative w-7 h-7">
+            <div className="relative w-6 h-6">
               <Menu 
                 className={cn(
-                  "absolute inset-0 w-7 h-7 transition-all duration-300",
+                  "absolute inset-0 w-6 h-6 transition-all duration-300",
                   mobileMenuOpen ? "opacity-0 rotate-90" : "opacity-100 rotate-0"
                 )} 
               />
               <X 
                 className={cn(
-                  "absolute inset-0 w-7 h-7 transition-all duration-300",
+                  "absolute inset-0 w-6 h-6 transition-all duration-300",
                   mobileMenuOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-90"
                 )} 
               />
@@ -188,9 +188,9 @@ export function Header() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "block px-4 py-3 text-neutral-dark hover:text-primary-green",
+                    "block min-h-[48px] px-4 py-3 text-neutral-dark hover:text-primary-green",
                     "hover:bg-white rounded-xl transition-all duration-200",
-                    "font-medium"
+                    "font-medium active:bg-primary-green/5"
                   )}
                   style={{ transitionDelay: `${index * 50}ms` }}
                   onClick={() => setMobileMenuOpen(false)}
@@ -203,7 +203,7 @@ export function Header() {
                       <Link
                         key={cat.name}
                         href={cat.href}
-                        className="block px-4 py-2 text-sm text-neutral-gray hover:text-primary-green hover:bg-white rounded-lg transition-all duration-200"
+                        className="block min-h-[44px] px-4 py-2.5 text-sm text-neutral-gray hover:text-primary-green hover:bg-white rounded-lg transition-all duration-200 active:bg-primary-green/5"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {cat.name}
@@ -218,7 +218,7 @@ export function Header() {
                 href="https://wa.me/8613888888888"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-center w-full"
+                className="btn-primary text-center w-full min-h-[52px] text-base"
               >
                 Get Quote
               </a>

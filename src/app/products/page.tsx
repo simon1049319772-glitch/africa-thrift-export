@@ -127,15 +127,15 @@ export default async function ProductsPage({ searchParams }: Props) {
           </aside>
 
           <div className="flex-1">
-            <AnimationWrapper animation="fade-up" delay={100} className="bg-white rounded-2xl shadow-sm p-5 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <p className="text-neutral-gray">
+            <AnimationWrapper animation="fade-up" delay={100} className="bg-white rounded-2xl shadow-sm p-4 sm:p-5 mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+              <p className="text-neutral-gray text-sm sm:text-base">
                 Showing <span className="font-semibold text-neutral-dark">{filteredProducts.length}</span> products
               </p>
               
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <label className="text-neutral-gray text-sm whitespace-nowrap">Sort:</label>
-                  <select className="border border-neutral-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-green transition-all hover:border-primary-green bg-white">
+              <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+                <div className="flex items-center gap-1 sm:gap-2 flex-1 sm:flex-none">
+                  <label className="text-neutral-gray text-xs sm:text-sm whitespace-nowrap">Sort:</label>
+                  <select className="border border-neutral-light rounded-xl px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-green transition-all hover:border-primary-green bg-white min-h-[44px]">
                     <option>Newest First</option>
                     <option>Price: Low to High</option>
                     <option>Price: High to Low</option>
@@ -170,7 +170,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                 </Link>
               </AnimationWrapper>
             ) : (
-              <StaggerContainer staggerDelay={60} className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+              <StaggerContainer staggerDelay={60} className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredProducts.map((product) => (
                   <Link
                     key={product.id}
@@ -196,17 +196,17 @@ export default async function ProductsPage({ searchParams }: Props) {
                         <span className="btn-primary text-sm">View Details</span>
                       </div>
                     </div>
-                    <div className="p-5">
-                      <p className="text-xs text-neutral-gray mb-2 flex items-center gap-1.5">
+                    <div className="p-3 sm:p-5">
+                      <p className="text-xs text-neutral-gray mb-1.5 sm:mb-2 flex items-center gap-1.5">
                         <Package className="w-3.5 h-3.5" />
                         {product.categoryName}
                       </p>
-                      <h3 className="font-semibold text-neutral-dark mb-3 line-clamp-2 leading-snug group-hover:text-primary-green transition-colors">
+                      <h3 className="font-semibold text-neutral-dark mb-2 sm:mb-3 line-clamp-2 leading-snug group-hover:text-primary-green transition-colors text-sm sm:text-base">
                         {product.name}
                       </h3>
-                      <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center justify-between mb-1.5 sm:mb-2">
                         <div>
-                          <span className="text-xl font-bold text-primary-green">
+                          <span className="text-base sm:text-xl font-bold text-primary-green">
                             {formatPrice(product.price)}
                           </span>
                           <span className="text-xs text-neutral-gray ml-1">/pc</span>
@@ -216,7 +216,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                           MOQ: {product.moq}
                         </span>
                       </div>
-                      <div className="text-xs text-neutral-gray">
+                      <div className="text-xs text-neutral-gray hidden sm:block">
                         Stock: {product.stock} available
                       </div>
                     </div>
