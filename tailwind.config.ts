@@ -8,6 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        // Mobile-first breakpoints
+        'xs': '375px',    // iPhone SE/Mini
+        'sm': '640px',    // iPhone Plus/Max
+        'md': '768px',    // Tablet
+        'lg': '1024px',   // Desktop
+        'xl': '1280px',   // Large Desktop
+        '2xl': '1536px',  // Extra Large
+        
+        // Fluid typography
+        'fluid': '100vw',
+      },
       colors: {
         primary: {
           green: "#0D5C3D",
